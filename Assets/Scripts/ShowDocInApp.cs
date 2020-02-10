@@ -11,7 +11,7 @@ public class ShowDocInApp : MonoBehaviour
 {
     public InputField urlField;
     private string url;
-    public Text optext;
+    public Text optextHeaders, opTextData;
 
     public void OnClick()
     {
@@ -57,7 +57,8 @@ public class ShowDocInApp : MonoBehaviour
             }
             Debug.Log("\'"+sb+"\'");
 
-            optext.text = sb.ToString();
+            optextHeaders.text = sb.ToString();
+            opTextData.text = webRequest.downloadHandler.text;
         }
     }
 
