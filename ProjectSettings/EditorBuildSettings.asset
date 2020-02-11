@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/pauseWhenOpenDoc.unity
+    guid: 8b45d91bca5ac4e35a4ff78019591453
   m_configObjects: {}
