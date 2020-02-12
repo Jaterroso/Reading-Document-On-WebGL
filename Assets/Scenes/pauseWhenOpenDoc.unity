@@ -1031,7 +1031,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   addText: {fileID: 438780162}
   strReturn: {fileID: 1585573328}
-  url: https://www.google.com
+  url: https://docs.google.com/spreadsheets/d/1Y1M6xG93mP_pRjOkOhnkY81vou_gKnB5/edit#gid=1279124805&range=K668
 --- !u!4 &1291965697
 Transform:
   m_ObjectHideFlags: 0
