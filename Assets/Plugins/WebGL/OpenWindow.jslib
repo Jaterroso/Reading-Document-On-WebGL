@@ -46,22 +46,17 @@ mergeInto(LibraryManager.library,
     return buffer;
   },
 
-  BindWebGLTexture: function (texture) //not sure what it is
-  {
-    GLctx.bindTexture(GLctx.TEXTURE_2D, GL.textures[texture]);
-  },
-
   OpenInNewWindow : function(newUrl)
   {
-    setInterval(CheckMouseActive, 10); // Time in milliseconds
-    window.mouseOnScreen = true;
-    mouseOnScreen = false;
-    window.open(newUrl, '_blank');
-    document.addEventListener("visibilitychange", ()=> {CheckMouseActive(); console.log("page active - ", mouseOnScreen)});
-  },
+    var strUrl = Pointer_stringify(newUrl);
+    strUrl = strUrl.trim();
+    
+    console.log("opening new URL : '",strUrl,"'");
+    window.open(strUrl, '_blank');
+  }
 
 
-  CheckMouseActive : function()
+  /*CheckMouseActive : function()
   {
     if(mouseOnScreen === false)
     {
@@ -69,6 +64,6 @@ mergeInto(LibraryManager.library,
         mouseOnScreen = true;
         document.removeEventListener("visibilitychange", ()=> {CheckMouseActive(); console.log("page active - ", mouseOnScreen)});
     }
-  }
+  }*/
 
 });

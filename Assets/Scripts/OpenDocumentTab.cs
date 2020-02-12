@@ -22,9 +22,6 @@ public class OpenDocumentTab : MonoBehaviour
     private static extern string StringReturnValueFunction();
 
     [DllImport("__Internal")]
-    private static extern void BindWebGLTexture(int texture);
-
-    [DllImport("__Internal")]
     private static extern void OpenInNewWindow(string str);
 
     public Text addText;
@@ -32,26 +29,23 @@ public class OpenDocumentTab : MonoBehaviour
     public string url;
     void Start()
     {
-        Hello();
-
-        HelloString("This is a string.");
-
         float[] myArray = { 2.4f, 2.7f, 3.2f, 6.3f, 4, 15f, 5.23f};
         PrintFloatArray(myArray, myArray.Length);
 
-        int result = AddNumbers(5, 7);
-        Debug.Log(result);
-        addText.text = result.ToString();
-        Debug.Log(StringReturnValueFunction());
-        strReturn.text = StringReturnValueFunction();
-        var texture = new Texture2D(0, 0, TextureFormat.ARGB32, false);
-        //BindWebGLTexture(texture.GetNativeTextureID());
+        //int result = AddNumbers(5, 7);
+        //Debug.Log(result);
+        //addText.text = result.ToString();
+        //Debug.Log(StringReturnValueFunction());
+        //strReturn.text = StringReturnValueFunction();
     }
 
-    void ButtonClicked()
+    public void ButtonClicked()
     {
-        Time.timeScale = 0;
+        //Time.timeScale = 0;
+        //HelloString("redirecting to '"+ url+"'");
         OpenInNewWindow(url);
+        //Application.OpenURL(url,);
+        //Application.ExternalEval("window.open(" + url + ");");
     }
 
     public void MouseOverPage()
