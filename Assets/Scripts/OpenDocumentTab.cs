@@ -26,7 +26,9 @@ public class OpenDocumentTab : MonoBehaviour
 
     public Text addText;
     public Text strReturn;
-    public string url;
+    public string spreadSheetUrl;
+    public string documentUrl;
+    public string presentationUrl;
     void Start()
     {
         float[] myArray = { 2.4f, 2.7f, 3.2f, 6.3f, 4, 15f, 5.23f};
@@ -39,13 +41,19 @@ public class OpenDocumentTab : MonoBehaviour
         //strReturn.text = StringReturnValueFunction();
     }
 
-    public void ButtonClicked()
+    public void OpenSpreadSheet()
     {
-        //Time.timeScale = 0;
-        //HelloString("redirecting to '"+ url+"'");
-        OpenInNewWindow(url);
-        //Application.OpenURL(url,);
-        //Application.ExternalEval("window.open(" + url + ");");
+        OpenInNewWindow(spreadSheetUrl);
+    }
+
+    public void OpenDocument()
+    {
+        OpenInNewWindow(documentUrl);
+    }
+
+    public void OpenSlides()
+    {
+        OpenInNewWindow(presentationUrl);
     }
 
     public void MouseOverPage()
