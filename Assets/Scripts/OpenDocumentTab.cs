@@ -7,22 +7,25 @@ using UnityEngine.UI;
 public class OpenDocumentTab : MonoBehaviour
 {
     [DllImport("__Internal")]
-    private static extern void Hello();
+    private static extern void Hello(); // no returns
 
     [DllImport("__Internal")]
-    private static extern void HelloString(string str);
+    private static extern void HelloString(string str); // no returns
 
     [DllImport("__Internal")]
-    private static extern void PrintFloatArray(float[] array, int size);
+    private static extern void PrintFloatArray(float[] array, int size); // no returns
 
     [DllImport("__Internal")]
-    private static extern int AddNumbers(int x, int y);
+    private static extern int AddNumbers(int x, int y); // returns a integer
 
     [DllImport("__Internal")]
-    private static extern string StringReturnValueFunction();
+    private static extern string StringReturnValueFunction(); // gives a string of length 4 with first 3 lettters being 'bla'
 
     [DllImport("__Internal")]
-    private static extern void OpenInNewWindow(string str);
+    private static extern void OpenInNewWindow(string str); //opens the url passed in new webpage
+
+    [DllImport("__Internal")]
+    private static extern void openPopUp();
 
     public Text addText;
     public Text strReturn;
@@ -59,5 +62,10 @@ public class OpenDocumentTab : MonoBehaviour
     public void MouseOverPage()
     {
         Time.timeScale = 1;
+    }
+
+    public void OpenThePopUp()
+    {
+        openPopUp();
     }
 }

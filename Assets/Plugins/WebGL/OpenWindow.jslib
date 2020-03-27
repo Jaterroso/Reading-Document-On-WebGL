@@ -40,10 +40,10 @@ mergeInto(LibraryManager.library,
   StringReturnValueFunction: function () 
   {
     var returnStr = "bla";
-    var bufferSize = lengthBytesUTF8(returnStr) + 1;
-    var buffer = _malloc(bufferSize);
-    stringToUTF8(returnStr, buffer, bufferSize);
-    return buffer;
+    var bufferSize = lengthBytesUTF8(returnStr) + 1; // add a random text string of 1 size to 'bla'
+    var buffer = _malloc(bufferSize); //allocate memory
+    stringToUTF8(returnStr, buffer, bufferSize); //store 'buffer' of size 'bufferSize' in 'returnStr' in UTF8 format
+    return buffer; //return the string
   },
 
   OpenInNewWindow : function(newUrl)
@@ -53,6 +53,12 @@ mergeInto(LibraryManager.library,
     
     console.log("opening new URL : '",strUrl,"'");
     window.open(strUrl, '_blank');
+  },
+
+  openPopUp: function ()  //alerts with a hello world
+  {
+    window.showPopUp();
+    //in script.js have defined this to open and close a pop up
   }
 
 
