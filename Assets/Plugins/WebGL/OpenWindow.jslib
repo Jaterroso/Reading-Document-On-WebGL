@@ -26,6 +26,11 @@ mergeInto(LibraryManager.library,
     window.alert(Pointer_stringify(str));
   },
 
+  OnConsole: function (str)  //alerts with any string passed by unity
+  {
+    console.log(Pointer_stringify(str));
+  },
+
   PrintFloatArray: function (array, size) //prints the float array in console
   {
     for(var i = 0; i < size; i++)

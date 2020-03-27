@@ -13,6 +13,9 @@ public class OpenDocumentTab : MonoBehaviour
     private static extern void HelloString(string str); // no returns
 
     [DllImport("__Internal")]
+    private static extern void OnConsole(string str); //prints string in console
+
+    [DllImport("__Internal")]
     private static extern void PrintFloatArray(float[] array, int size); // no returns
 
     [DllImport("__Internal")]
@@ -32,6 +35,11 @@ public class OpenDocumentTab : MonoBehaviour
     public string spreadSheetUrl;
     public string documentUrl;
     public string presentationUrl;
+    public GameObject showText;
+    public TimeSinceLaunch timerRef;
+    private bool removeTimerText;
+    private float removeTime;
+
     void Start()
     {
         float[] myArray = { 2.4f, 2.7f, 3.2f, 6.3f, 4, 15f, 5.23f};
@@ -68,4 +76,22 @@ public class OpenDocumentTab : MonoBehaviour
     {
         openPopUp();
     }
+
+    public void ResetTimer()
+    {
+        OnConsole("received in Reset Timer of TestingObject");
+        showText.SetActive(true);
+        timerRef.runTime = 0;
+        //removeTime = Time.time;
+        //Invoke(nameof(RemoveTimerTextObj), 2);
+    }
+
+    //private void RemoveTimerTextObj()
+    //{
+    //    if(removeTimerText && Time.time-removeTime > 2)
+    //    {
+    //        removeTimerText = false;
+    //        showText.SetActive(false);
+    //    }
+    //}
 }

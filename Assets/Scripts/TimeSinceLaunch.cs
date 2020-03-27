@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class TimeSinceLaunch : MonoBehaviour
 {
     private Text myText;
-    private float runTime;
+    public float runTime;
     private void Start()
     {
         myText = GetComponent<Text>();
