@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Video;
 
 public class OpenDocumentTab : MonoBehaviour
 {
@@ -30,40 +31,40 @@ public class OpenDocumentTab : MonoBehaviour
     [DllImport("__Internal")]
     private static extern void openPopUp();
 
-    public Text addText;
-    public Text strReturn;
+    [Header("Documents URL")]
     public string spreadSheetUrl;
     public string documentUrl;
     public string presentationUrl;
+
+    [Header("time Text")]
     public GameObject showText;
     public TimeSinceLaunch timerRef;
-    private bool removeTimerText;
-    private float removeTime;
+
+    [Header("Media Files")]
+    public VideoPlayer videoPlayer;
+    public AudioSource audioPlayer;
 
     void Start()
     {
         float[] myArray = { 2.4f, 2.7f, 3.2f, 6.3f, 4, 15f, 5.23f};
         PrintFloatArray(myArray, myArray.Length);
-
-        //int result = AddNumbers(5, 7);
-        //Debug.Log(result);
-        //addText.text = result.ToString();
-        //Debug.Log(StringReturnValueFunction());
-        //strReturn.text = StringReturnValueFunction();
     }
 
     public void OpenSpreadSheet()
     {
+        videoPlayer.Pause();
         OpenInNewWindow(spreadSheetUrl);
     }
 
     public void OpenDocument()
     {
+        videoPlayer.Pause();
         OpenInNewWindow(documentUrl);
     }
 
     public void OpenSlides()
     {
+        videoPlayer.Pause();
         OpenInNewWindow(presentationUrl);
     }
 
@@ -74,24 +75,28 @@ public class OpenDocumentTab : MonoBehaviour
 
     public void OpenThePopUp()
     {
+        videoPlayer.Pause();
+        audioPlayer.Play();
         openPopUp();
     }
 
     public void ResetTimer()
     {
-        OnConsole("received in Reset Timer of TestingObject");
         showText.SetActive(true);
         timerRef.runTime = 0;
-        //removeTime = Time.time;
-        //Invoke(nameof(RemoveTimerTextObj), 2);
+        PageIsFocused();
+        OnConsole("received in Reset Timer of TestingObject");
     }
 
-    //private void RemoveTimerTextObj()
-    //{
-    //    if(removeTimerText && Time.time-removeTime > 2)
-    //    {
-    //        removeTimerText = false;
-    //        showText.SetActive(false);
-    //    }
-    //}
+    public void PageIsFocused()
+    {
+        videoPlayer.Play();
+        audioPlayer.Stop();
+    }
+
+    public void PageIsNotFocused()
+    {
+        videoPlayer.Pause();
+        audioPlayer.Stop();
+    }
 }
