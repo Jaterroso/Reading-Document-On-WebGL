@@ -44,27 +44,36 @@ public class OpenDocumentTab : MonoBehaviour
     public VideoPlayer videoPlayer;
     public AudioSource audioPlayer;
 
+    private float timePerFrame = 0.4f;
+    public float timeScaleAmount;
+
+
+    private bool showDeltaTime;
     void Start()
     {
+        Application.targetFrameRate = 60;
+        timeScaleAmount = 0.3f;
+        Time.maximumDeltaTime = timeScaleAmount;
+        OnConsole("at start maximumDeltaTime: " + Time.maximumDeltaTime.ToString());
         float[] myArray = { 2.4f, 2.7f, 3.2f, 6.3f, 4, 15f, 5.23f};
         PrintFloatArray(myArray, myArray.Length);
     }
 
     public void OpenSpreadSheet()
     {
-        videoPlayer.Pause();
+        //videoPlayer.Pause();
         OpenInNewWindow(spreadSheetUrl);
     }
 
     public void OpenDocument()
     {
-        videoPlayer.Pause();
+        //videoPlayer.Pause();
         OpenInNewWindow(documentUrl);
     }
 
     public void OpenSlides()
     {
-        videoPlayer.Pause();
+        //videoPlayer.Pause();
         OpenInNewWindow(presentationUrl);
     }
 
@@ -75,7 +84,7 @@ public class OpenDocumentTab : MonoBehaviour
 
     public void OpenThePopUp()
     {
-        videoPlayer.Pause();
+        //videoPlayer.Pause();
         audioPlayer.Play();
         openPopUp();
     }
@@ -84,19 +93,53 @@ public class OpenDocumentTab : MonoBehaviour
     {
         showText.SetActive(true);
         timerRef.runTime = 0;
-        PageIsFocused();
+        //PageIsFocused();
+        //videoPlayer.Play();
+        audioPlayer.Stop();
         OnConsole("received in Reset Timer of TestingObject");
     }
 
     public void PageIsFocused()
     {
+        showDeltaTime = false;
+        OnConsole("after hiding : maximumDeltaTime: " + Time.maximumDeltaTime.ToString());
+        return;
+
         videoPlayer.Play();
         audioPlayer.Stop();
+        OnConsole("page is focused so playing video and stopped pop up audio");
     }
 
     public void PageIsNotFocused()
     {
+        showDeltaTime = true;
+        return;
+
         videoPlayer.Pause();
         audioPlayer.Stop();
+        OnConsole("page is not focused so stopping video and stopped pop up audio");
+    }
+
+
+    public void SetTimeScale(Slider SliderRef)
+    {
+        timeScaleAmount = SliderRef.value;
+
+        Time.maximumDeltaTime = timeScaleAmount * timePerFrame; //this should make it so, with a lower timeScaleAmount, the Time.maximumDeltaTime will be lower as well
+        //if (Time.maximumDeltaTime > timePerFrame)
+        //{
+        //    Time.maximumDeltaTime = timePerFrame; // when the timeScaleAmount is greater than 1, make no changes to the Time.maximumDeltaTime (Because it works fine)
+        //}
+        OnConsole("maximumDeltaTime: " + Time.maximumDeltaTime.ToString());
+        //OnConsole("Supposed Value: " + (timeScaleAmount * timePerFrame).ToString());
+        Time.timeScale = timeScaleAmount; // assign the Time.timeScale Value
+    }
+
+    private void Update()
+    {
+        if (showDeltaTime)
+        {
+            OnConsole("during hiding : maximumDeltaTime: " + Time.maximumDeltaTime.ToString());
+        }
     }
 }
